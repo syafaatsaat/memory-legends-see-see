@@ -35,7 +35,7 @@ src/styles/       tokens.css, global.css, one stylesheet per component
 ## Build plan
 
 - [x] 1. Setup — clean template, design tokens, fonts, mode config, API client, best-score storage, Home screen
-- [ ] 2. Game rules (`src/state/game.js`) — pure functions: pick random roles, build the hero pool, deal a board
+- [x] 2. Game rules (`src/state/game.js`) — pure functions: pick random roles, build the hero pool, deal a board
       that always contains at least one unpicked hero, handle a pick (win / continue / defeat), Endless pool reset
 - [ ] 3. Game state hook — `useReducer` around the rules, plus loading and error states for the hero fetch
 - [ ] 4. Game screen — HUD (mode, roles, score, progress), hero card grid, reshuffle after each pick
