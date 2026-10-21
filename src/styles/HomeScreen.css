@@ -28,6 +28,11 @@
   color: var(--gold);
 }
 
+/* The shield's artwork sits ~4px inside its box; shift it onto the content edge. */
+.home__logo svg {
+  margin-left: -4px;
+}
+
 .home__logo span {
   font-family: var(--font-display);
   font-weight: 700;
@@ -68,6 +73,9 @@
   font-size: clamp(44px, 7vw, 84px);
   line-height: 0.95;
   letter-spacing: 0.01em;
+  /* Large Rajdhani capitals carry ~0.05em of built-in left spacing; pull it back so the
+     headline's letters line up with the small text above and below. */
+  margin-left: -0.05em;
 }
 
 .home__hero p {
