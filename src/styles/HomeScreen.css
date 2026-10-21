@@ -28,18 +28,67 @@
   color: var(--gold);
 }
 
-/* The shield's artwork sits ~4px inside its box; shift it onto the content edge. */
+/* The logo's artwork sits ~4px inside its box; shift it onto the content edge. */
 .home__logo svg {
   margin-left: -4px;
 }
 
-.home__logo span {
+.home__wordmark {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  white-space: nowrap;
   color: var(--text);
+}
+
+.home__wordmark-sub {
+  color: var(--gold);
+}
+
+/* Narrow screens: "See See" drops under the name as a small, wide-tracked subtitle, so the
+   logo is no wider than "Memory Legends" alone and never crowds "How to play". The colon is
+   hidden visually but still read out ("Memory Legends: See See"). */
+@media (max-width: 640px) {
+  .home__wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .home__wordmark-sep {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .home__wordmark-sub {
+    margin-top: 2px;
+    font-size: 13px;
+    letter-spacing: 0.42em;
+  }
+
+  /* Small phones (≤ ~430px): the name and icon scale down with the screen so the logo and
+     "How to play" keep sharing one row (16px name at 320px wide, full 22px from ~430px). */
+  .home__bar {
+    gap: 12px;
+  }
+
+  .home__logo {
+    gap: 10px;
+  }
+
+  .home__wordmark {
+    font-size: clamp(16px, 5.1vw, 22px);
+  }
+
+  .home__logo svg {
+    width: clamp(28px, 8.2vw, 34px);
+    height: clamp(28px, 8.2vw, 34px);
+  }
 }
 
 .home__how-link {

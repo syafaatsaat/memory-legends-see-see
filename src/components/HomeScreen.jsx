@@ -20,7 +20,11 @@ function HomeScreen({ bestScore, onSelectMode }) {
       <header className="home__bar container">
         <div className="home__logo">
           <LogoIcon />
-          <span>Memory Legends</span>
+          {/* One line on wide screens, "See See" on its own line on narrow ones (HomeScreen.css). */}
+          <span className="home__wordmark">
+            Memory Legends<span className="home__wordmark-sep">: </span>
+            <span className="home__wordmark-sub">See See</span>
+          </span>
         </div>
         <a href="#how-to-play" className="home__how-link">How to play</a>
       </header>

@@ -20,7 +20,11 @@ function EndlessOverScreen({ game, bestScore, previousBest, isNewRecord, onPlayA
           <div className="result__record-head">
             <span className="result__brand">
               <LogoIcon size={22} />
-              Memory Legends
+              {/* One line on wide screens, "See See" under the name on phones (ResultScreen.css). */}
+              <span className="result__brand-name">
+                Memory Legends<span className="result__brand-sep">: </span>
+                <span className="result__brand-sub">See See</span>
+              </span>
             </span>
             <span className="result__endless-tag">
               <InfinityIcon size={18} />

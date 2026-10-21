@@ -333,7 +333,57 @@
 }
 
 .result__brand svg {
+  flex-shrink: 0;
   color: var(--gold);
+}
+
+.result__brand-name {
+  white-space: nowrap;
+  text-align: left;
+}
+
+.result__brand-sub {
+  color: var(--gold);
+}
+
+/* Phones: the card's top row can't fit the full name beside "∞ Endless", so "See See"
+   drops under the name (same treatment as the home header; the colon is still read out). */
+@media (max-width: 480px) {
+  .result__brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .result__brand-sep {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .result__brand-sub {
+    margin-top: 2px;
+    font-size: 10px;
+    letter-spacing: 0.42em;
+  }
+}
+
+/* Smallest phones: keep a gap between the name and "∞ Endless". */
+@media (max-width: 360px) {
+  .result__brand {
+    font-size: 14px;
+  }
+
+  .result__endless-tag {
+    font-size: 12px;
+  }
+
+  /* Two classes so it beats the ≤480px padding rule further down. */
+  .result__record .result__record-inner {
+    padding-inline: 14px;
+  }
 }
 
 .result__endless-tag {

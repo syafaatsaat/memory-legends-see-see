@@ -1,4 +1,4 @@
-# Memory Legends
+# Memory Legends: See See
 
 **Play it:** https://memory-legends-see-see.vercel.app/
 
