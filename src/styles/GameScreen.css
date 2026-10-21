@@ -153,30 +153,71 @@
   text-align: right;
 }
 
-/* Takes the space left under the HUD and centers the board in it. */
+/* Takes the space left under the HUD; the board is sized to fit inside .game__area. */
 .game__main {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-top: 28px;
+  padding-bottom: 24px;
+}
+
+/* flex-basis 0 + min-height 0: the area's size comes from the screen, never from the board,
+   so measuring it (useBoardFit) can't feed back into itself. */
+.game__area {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  padding-top: 36px;
-  padding-bottom: 48px;
 }
 
-.game__board {
-  width: 100%;
+/* Even minimum-size cards don't fit (tiny or landscape screens): scroll inside the area
+   rather than spilling over what's below it. */
+.game__area.is-overflowing {
+  overflow-y: auto;
+  align-items: flex-start;
 }
 
-/* Cards cap at ~190px so a two-row board fits on a laptop screen without scrolling.
-   Flex rather than grid so a part-filled last row (phones) sits centered. */
+/* Until useBoardFit measures (one frame), cards use the mode's preferred columns, capped at
+   190px. Flex rather than grid so a part-filled last row sits centered. */
 .game__board {
   --gap: 16px;
+  --cols: var(--preferred-cols, 4);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--gap);
+  width: 100%;
   max-width: calc(var(--cols) * 190px + (var(--cols) - 1) * var(--gap));
-  margin: 0 auto;
+  margin: auto;
+}
+
+.game__board.is-fit {
+  max-width: none;
+  flex-shrink: 0;
+}
+
+/* Compact cards (useBoardFit, when cards would be narrower than 110px): square art and the
+   name only; the role chips in the HUD already show the roles. The text block here must stay
+   35px tall including the card frame (COMPACT_TEXT_HEIGHT). */
+.game__board.is-compact .hero-card__frame {
+  aspect-ratio: 1 / 1;
+}
+
+.game__board.is-compact .hero-card__roles {
+  display: none;
+}
+
+.game__board.is-compact .hero-card__text {
+  height: 33px;
+  box-sizing: border-box;
+  justify-content: center;
+  padding: 0 8px;
+}
+
+.game__board.is-compact .hero-card__name {
+  font-size: 14px;
 }
 
 .game__board > .hero-card {
@@ -215,23 +256,85 @@
 }
 
 .game__hint {
-  margin-top: 28px;
+  margin-top: 20px;
   font-size: 14px;
   color: var(--muted);
   text-align: center;
 }
 
 @media (max-width: 760px) {
-  .game__board {
-    --cols: 3 !important;
-    --gap: 10px;
+  /* Two-row HUD: back, mode and score on top, role chips below. */
+  .game__hud {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      'back name scores'
+      'roles roles roles';
+    align-items: center;
+    gap: 10px 12px;
+    padding-top: 14px;
+    padding-bottom: 12px;
   }
 
-  .game__main {
-    padding-top: 24px;
+  .game__mode {
+    display: contents;
+  }
+
+  .game__back {
+    grid-area: back;
+  }
+
+  .game__mode-name {
+    grid-area: name;
+    font-size: 22px;
+  }
+
+  .game__roles {
+    grid-area: roles;
+    gap: 6px;
+  }
+
+  .game__roles li {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  .game__scores {
+    grid-area: scores;
+    gap: 16px;
   }
 
   .game__score-value {
     font-size: 36px;
+  }
+
+  .game__board {
+    --gap: 10px;
+  }
+
+  .game__board:not(.is-fit) {
+    --cols: 3;
+  }
+
+  .game__main {
+    padding-top: 16px;
+    padding-bottom: 12px;
+  }
+
+  /* The rules are on the home screen; on phones the space goes to the cards. */
+  .game__hint {
+    display: none;
+  }
+}
+
+/* Short screens (phones in landscape): the space goes to the cards. */
+@media (max-height: 500px) {
+  .game__hint {
+    display: none;
+  }
+
+  .game__main {
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 }

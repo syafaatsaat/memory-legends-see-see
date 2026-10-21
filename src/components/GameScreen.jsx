@@ -3,6 +3,7 @@ import { featuredHero } from '../state/game.js'
 import { fetchHeroWallpaper } from '../state/wallpapersApi.js'
 import { BackIcon } from './Icons.jsx'
 import HeroCard from './HeroCard.jsx'
+import { useBoardFit } from './useBoardFit.js'
 import { usePreloadImages } from './usePreloadImages.js'
 import '../styles/GameScreen.css'
 
@@ -43,6 +44,8 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
   const isPlaying = game.status === 'playing'
   // The deal whose board the pointer has moved over; hover highlights wait for it.
   const [hoverRound, setHoverRound] = useState(-1)
+
+  const { areaRef, boardRef, fit } = useBoardFit(game.board.length, mode.columns)
 
   const poolImages = useMemo(() => game.pool.map((hero) => hero.image), [game.pool])
   usePreloadImages(poolImages)
@@ -96,16 +99,20 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
       </div>
 
       <main className="container game__main">
-        {/* Keyed by deal so every new board remounts and deals in. */}
-        <div
-          key={game.deal}
-          className={`game__board ${hoverRound === game.deal ? 'is-hover-ready' : ''}`}
-          style={{ '--cols': mode.columns }}
-          onPointerMove={() => setHoverRound(game.deal)}
-        >
-          {game.board.map((hero, index) => (
-            <HeroCard key={hero.id} hero={hero} index={index} highlight={highlightFor(hero)} disabled={!isPlaying} onPick={onPick} />
-          ))}
+        {/* The space left for the board; its size decides how big the cards can be. */}
+        <div ref={areaRef} className={`game__area ${fit?.overflows ? 'is-overflowing' : ''}`}>
+          {/* Keyed by deal so every new board remounts and deals in. */}
+          <div
+            key={game.deal}
+            ref={boardRef}
+            className={['game__board', fit && 'is-fit', fit?.compact && 'is-compact', hoverRound === game.deal && 'is-hover-ready'].filter(Boolean).join(' ')}
+            style={fit ? { '--cols': fit.cols, width: fit.boardWidth } : { '--preferred-cols': mode.columns }}
+            onPointerMove={() => setHoverRound(game.deal)}
+          >
+            {game.board.map((hero, index) => (
+              <HeroCard key={hero.id} hero={hero} index={index} highlight={highlightFor(hero)} disabled={!isPlaying} onPick={onPick} />
+            ))}
+          </div>
         </div>
         <p className="game__hint">Pick a hero you haven't picked yet. The board reshuffles after every pick.</p>
       </main>
