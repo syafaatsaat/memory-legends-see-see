@@ -1,4 +1,4 @@
-import { ShieldIcon } from './Icons.jsx'
+import { LogoIcon } from './Icons.jsx'
 import '../styles/LoadScreen.css'
 
 // Shown when a mode is picked before the hero list has arrived, or if loading it failed.
@@ -8,7 +8,7 @@ function LoadScreen({ status, onRetry, onBack }) {
   return (
     <div className="load" role={failed ? 'alert' : 'status'}>
       <span className={`load__icon ${failed ? 'is-error' : ''}`}>
-        <ShieldIcon size={48} crossed={failed} />
+        <LogoIcon size={48} />
       </span>
       {failed ? (
         <>

@@ -1,6 +1,6 @@
 import { MODES } from '../state/modes.js'
 import { useWallpaper } from '../state/useWallpaper.js'
-import { ShieldIcon } from './Icons.jsx'
+import { LogoIcon } from './Icons.jsx'
 import ModeCard from './ModeCard.jsx'
 import Wallpaper from './Wallpaper.jsx'
 import '../styles/HomeScreen.css'
@@ -19,7 +19,7 @@ function HomeScreen({ bestScore, onSelectMode }) {
       <Wallpaper url={wallpaper} placement="banner" />
       <header className="home__bar container">
         <div className="home__logo">
-          <ShieldIcon />
+          <LogoIcon />
           <span>Memory Legends</span>
         </div>
         <a href="#how-to-play" className="home__how-link">How to play</a>

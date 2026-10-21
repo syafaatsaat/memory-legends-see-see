@@ -39,7 +39,7 @@
   max-width: 760px;
 }
 
-/* Rule — shield — rule */
+/* Rule — card — rule */
 .result-rule {
   display: flex;
   align-items: center;
@@ -326,7 +326,14 @@
 }
 
 .result__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 16px;
+}
+
+.result__brand svg {
+  color: var(--gold);
 }
 
 .result__endless-tag {

@@ -1,8 +1,21 @@
-export function ShieldIcon({ size = 34, crossed = false }) {
+// The Memory Legends mark: two stacked cut-corner cards (the hero card shape) with a gem.
+// Card faces are filled with the page color so the front card hides the back one's outline.
+export function LogoIcon({ size = 34 }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5l-8-3Z" />
-      <path d={crossed ? 'm9.5 9.5 5 5m0-5-5 5' : 'M8.5 12.5 11 15l4.5-5'} />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="miter" aria-hidden="true">
+      <path d="M12 2.5h9v11.5l-3 3H9v-11.5z" style={{ fill: 'var(--bg)' }} />
+      <path d="M6 7.5h9V19l-3 3H3V10.5z" style={{ fill: 'var(--bg)' }} />
+      <path d="M9 12.2l2.4 2.6L9 17.4l-2.4-2.6z" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+// A single cut-corner card with a tick (victory) or a cross (defeat).
+export function ResultCardIcon({ size = 40, crossed = false }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="miter" aria-hidden="true">
+      <path d="M8 2.5h11v15l-4 4H5v-15z" />
+      <path d={crossed ? 'm9.5 9.5 5 5m0-5-5 5' : 'm8.8 12.3 2.4 2.5 4.1-5'} />
     </svg>
   )
 }

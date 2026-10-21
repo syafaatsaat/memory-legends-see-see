@@ -1,4 +1,4 @@
-import { InfinityIcon } from './Icons.jsx'
+import { InfinityIcon, LogoIcon } from './Icons.jsx'
 import { useAutoFocus } from './useAutoFocus.js'
 import { featuredHero } from '../state/game.js'
 import { useWallpaper } from '../state/useWallpaper.js'
@@ -18,7 +18,10 @@ function EndlessOverScreen({ game, bestScore, previousBest, isNewRecord, onPlayA
       <section className="result__record bevel" aria-labelledby="result-title">
         <div className="result__record-inner bevel">
           <div className="result__record-head">
-            <span className="result__brand">Memory Legends</span>
+            <span className="result__brand">
+              <LogoIcon size={22} />
+              Memory Legends
+            </span>
             <span className="result__endless-tag">
               <InfinityIcon size={18} />
               Endless

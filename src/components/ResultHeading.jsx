@@ -1,7 +1,7 @@
-import { ShieldIcon } from './Icons.jsx'
+import { ResultCardIcon } from './Icons.jsx'
 import { useAutoFocus } from './useAutoFocus.js'
 
-// Big VICTORY / DEFEAT title between two rules.
+// Big VICTORY / DEFEAT title under a rule — card — rule ornament.
 function ResultHeading({ title, tone }) {
   const headingRef = useAutoFocus()
 
@@ -9,7 +9,7 @@ function ResultHeading({ title, tone }) {
     <>
       <div className={`result-rule result-rule--${tone}`}>
         <span />
-        <ShieldIcon size={40} crossed={tone === 'defeat'} />
+        <ResultCardIcon size={40} crossed={tone === 'defeat'} />
         <span />
       </div>
       <h1 ref={headingRef} id="result-title" tabIndex={-1} className={`result-title result-title--${tone}`}>
