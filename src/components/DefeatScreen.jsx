@@ -24,13 +24,12 @@ function DefeatScreen({ game, onPlayAgain, onChangeMode }) {
               <img src={repeatedHero.image} alt="" width="400" height="400" />
               <div>
                 <span className="result__repeat-name">{repeatedHero.name}</span>
-                <span className="result__repeat-note">Picked twice</span>
               </div>
             </div>
           </div>
 
           <div className="result__defeat-score">
-            <div>
+            <div className="result__score-row">
               <span className="result__label">Picks</span>
               <span className="result__score">
                 {score} <span>/ {mode.target}</span>

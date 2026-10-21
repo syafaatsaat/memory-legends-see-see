@@ -224,13 +224,6 @@
   font-size: 20px;
 }
 
-.result__repeat-note {
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--defeat-muted);
-}
-
 .result__defeat-score {
   display: flex;
   flex-direction: column;
@@ -239,10 +232,11 @@
   text-align: left;
 }
 
-.result__defeat-score > div:first-child {
+/* "PICKS 8 / 15" on one line */
+.result__score-row {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: baseline;
+  gap: 12px;
 }
 
 .result__score {
@@ -478,6 +472,47 @@
   from {
     opacity: 0;
     transform: translateY(14px);
+  }
+}
+
+/* Phones: the Defeat screen fits without scrolling. The repeated hero's card and the score sit
+   side by side, the buttons share a row, and the screen's vertical padding shrinks. */
+@media (max-width: 480px) {
+  .result {
+    padding-block: 28px;
+  }
+
+  .result__body,
+  .result--endless {
+    gap: 22px;
+  }
+
+  .result__defeat-detail {
+    flex-wrap: nowrap;
+    gap: 16px;
+  }
+
+  .result__repeat-card {
+    flex-shrink: 0;
+    width: 120px;
+  }
+
+  .result__defeat-score {
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .result__score {
+    font-size: 36px;
+  }
+
+  .result__segments {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .result__actions .btn {
+    padding-inline: 20px;
   }
 }
 
