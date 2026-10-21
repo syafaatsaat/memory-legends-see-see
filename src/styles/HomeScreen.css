@@ -134,7 +134,11 @@
   color: var(--muted);
 }
 
+/* Rajdhani's digits differ in width ("01" is narrower than "02"), so the number column gets a
+   fixed width to keep every rule's text starting at the same x. */
 .home__step-num {
+  flex: 0 0 1.25em;
+  font-variant-numeric: tabular-nums;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 36px;
