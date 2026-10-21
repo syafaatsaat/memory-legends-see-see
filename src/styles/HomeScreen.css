@@ -200,7 +200,15 @@
   margin-top: auto;
   padding: 20px var(--gutter);
   border-top: 1px solid var(--line-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   text-align: center;
   font-size: 13px;
   color: var(--faint);
+}
+
+.home__credit {
+  font-size: 14px;
+  color: var(--text-2);
 }

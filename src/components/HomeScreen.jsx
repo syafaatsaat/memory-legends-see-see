@@ -60,8 +60,13 @@ function HomeScreen({ bestScore, onSelectMode }) {
       </section>
 
       <footer className="home__footer">
-        Fan project. Hero data from the <a href="https://arena.rone.dev/">Rone Arena API</a>. Hero art and wallpapers © Moonton.
-        Not affiliated with or endorsed by Moonton.
+        <p className="home__credit">
+          Made by <a href="https://github.com/syafaatsaat">syafaatsaat</a>
+        </p>
+        <p>
+          Fan project. Hero data from the <a href="https://arena.rone.dev/">Rone Arena API</a>. Hero art and wallpapers © Moonton.
+          Not affiliated with or endorsed by Moonton.
+        </p>
       </footer>
     </div>
   )
