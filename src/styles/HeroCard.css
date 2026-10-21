@@ -9,7 +9,8 @@
   cursor: pointer;
 }
 
-.hero-card:hover:not(:disabled),
+/* Hover is enabled by the board (GameScreen.css) only after the pointer moves,
+   so a freshly dealt card under a resting cursor doesn't light up. */
 .hero-card:focus-visible {
   background: var(--gold);
 }
@@ -18,21 +19,39 @@
   cursor: default;
 }
 
+.hero-card.is-picked {
+  background: var(--gold);
+}
+
+.hero-card.is-repeat {
+  background: var(--red);
+}
+
 .hero-card__inner {
   display: flex;
   flex-direction: column;
   background: var(--surface);
 }
 
+.hero-card__frame {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+
 .hero-card__art {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
   /* Splash art is square; faces sit in the upper half. */
   object-position: 50% 30%;
-  background: var(--surface-2);
+  opacity: 0;
+}
+
+.hero-card__frame.is-loaded .hero-card__art {
+  opacity: 1;
 }
 
 .hero-card__text {
@@ -71,5 +90,64 @@
   .hero-card__roles {
     font-size: 11px;
     letter-spacing: 0.04em;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Deal in, staggered by board position (--i). */
+  .hero-card {
+    animation: card-deal 200ms ease-out both;
+    animation-delay: calc(var(--i, 0) * 18ms);
+  }
+
+  .hero-card:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  .hero-card.is-repeat {
+    animation: card-shake 420ms ease-in-out;
+  }
+
+  .hero-card.is-picked {
+    animation: card-pop 320ms ease-out;
+  }
+
+  .hero-card__frame:not(.is-loaded) {
+    background: linear-gradient(100deg, var(--surface-2) 40%, var(--line) 50%, var(--surface-2) 60%) 0 0 / 300% 100%;
+    animation: card-shimmer 1.2s linear infinite;
+  }
+
+  .hero-card__art {
+    transition: opacity 200ms ease-out;
+  }
+}
+
+@keyframes card-deal {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+}
+
+@keyframes card-shake {
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes card-pop {
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes card-shimmer {
+  to {
+    background-position: -150% 0;
   }
 }

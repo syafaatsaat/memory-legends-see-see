@@ -1,6 +1,11 @@
+import { useEffect, useMemo, useState } from 'react'
 import { BackIcon } from './Icons.jsx'
 import HeroCard from './HeroCard.jsx'
+import { usePreloadImages } from './usePreloadImages.js'
 import '../styles/GameScreen.css'
+
+// How long the last pick stays on screen (shake or pop) before the result screen.
+const FINISH_DELAY_MS = 900
 
 function Progress({ game }) {
   if (game.mode.id === 'endless') {
@@ -30,10 +35,28 @@ function Progress({ game }) {
   )
 }
 
-function GameScreen({ game, bestScore, onPick, onQuit }) {
+function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
   const { mode } = game
   const isEndless = mode.id === 'endless'
   const isPlaying = game.status === 'playing'
+  // The deal whose board the pointer has moved over; hover highlights wait for it.
+  const [hoverRound, setHoverRound] = useState(-1)
+
+  const poolImages = useMemo(() => game.pool.map((hero) => hero.image), [game.pool])
+  usePreloadImages(poolImages)
+
+  useEffect(() => {
+    if (isPlaying) return
+    const timer = setTimeout(onFinished, FINISH_DELAY_MS)
+    return () => clearTimeout(timer)
+  }, [isPlaying, onFinished])
+
+  const lastPickId = game.history.at(-1)?.id
+  function highlightFor(hero) {
+    if (game.status === 'lost' && hero.id === game.repeatedHero.id) return 'repeat'
+    if (game.status === 'won' && hero.id === lastPickId) return 'picked'
+    return null
+  }
 
   return (
     <div className="game">
@@ -67,9 +90,15 @@ function GameScreen({ game, bestScore, onPick, onQuit }) {
       </div>
 
       <main className="container game__main">
-        <div className="game__board" style={{ '--cols': mode.columns }}>
-          {game.board.map((hero) => (
-            <HeroCard key={hero.id} hero={hero} disabled={!isPlaying} onPick={onPick} />
+        {/* Keyed by deal so every new board remounts and deals in. */}
+        <div
+          key={game.deal}
+          className={`game__board ${hoverRound === game.deal ? 'is-hover-ready' : ''}`}
+          style={{ '--cols': mode.columns }}
+          onPointerMove={() => setHoverRound(game.deal)}
+        >
+          {game.board.map((hero, index) => (
+            <HeroCard key={hero.id} hero={hero} index={index} highlight={highlightFor(hero)} disabled={!isPlaying} onPick={onPick} />
           ))}
         </div>
         <p className="game__hint">Pick a hero you haven't picked yet. The board reshuffles after every pick.</p>

@@ -45,6 +45,7 @@ export function createGame(mode, heroes, random = Math.random) {
     score: 0,
     resets: 0,
     board: dealBoard(pool, [], mode.boardSize, random),
+    deal: 0, // counts boards dealt; the UI keys the board on it to animate each new deal
     status: 'playing', // 'playing' | 'won' | 'lost'
     repeatedHero: null,
   }
@@ -81,5 +82,6 @@ export function pickHero(game, heroId, random = Math.random) {
     score,
     resets,
     board: dealBoard(game.pool, pickedIds, game.mode.boardSize, random),
+    deal: game.deal + 1,
   }
 }

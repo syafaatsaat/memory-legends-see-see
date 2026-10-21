@@ -20,7 +20,7 @@ function ModeCard({ mode, bestScore, onSelect }) {
   ]
 
   return (
-    <button type="button" className={`mode-card bevel ${isEndless ? 'mode-card--endless' : ''}`} onClick={() => onSelect(mode.id)}>
+    <button type="button" className={`mode-card mode-card--${mode.id} bevel`} onClick={() => onSelect(mode.id)}>
       <span className="mode-card__inner bevel">
         <span className="mode-card__head">
           <span className="mode-card__title">{mode.label}</span>

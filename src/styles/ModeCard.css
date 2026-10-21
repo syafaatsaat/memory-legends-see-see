@@ -1,22 +1,33 @@
+/* Each mode takes a rank color: --rank tints the title, pips, play label and border. */
+.mode-card--easy {
+  --rank: var(--rank-silver);
+}
+
+.mode-card--medium {
+  --rank: var(--rank-jade);
+}
+
+.mode-card--hard {
+  --rank: var(--rank-gold);
+}
+
+.mode-card--endless {
+  --rank: var(--rank-purple);
+}
+
 .mode-card {
   display: block;
   width: 100%;
   padding: 1px;
   border: 0;
-  background: var(--line);
+  background: color-mix(in srgb, var(--rank) 35%, var(--line));
   text-align: left;
   cursor: pointer;
 }
 
 .mode-card:hover,
 .mode-card:focus-visible {
-  background: var(--blue);
-}
-
-.mode-card--endless,
-.mode-card--endless:hover,
-.mode-card--endless:focus-visible {
-  background: var(--gold);
+  background: var(--rank);
 }
 
 .mode-card__inner {
@@ -29,13 +40,14 @@
 }
 
 .mode-card--endless .mode-card__inner {
-  background: #1a1a22;
+  background: #1a1630;
 }
 
 .mode-card__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--rank);
 }
 
 .mode-card__title {
@@ -43,11 +55,6 @@
   font-weight: 700;
   font-size: 30px;
   letter-spacing: 0.04em;
-}
-
-.mode-card--endless .mode-card__title,
-.mode-card--endless svg {
-  color: var(--gold);
 }
 
 .mode-card__pips {
@@ -62,7 +69,7 @@
 }
 
 .mode-card__pips span.is-on {
-  background: var(--blue);
+  background: var(--rank);
 }
 
 .mode-card__rows {
@@ -100,11 +107,7 @@
   font-size: 15px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--blue);
-}
-
-.mode-card--endless .mode-card__play {
-  color: var(--gold);
+  color: var(--rank);
 }
 
 .mode-card__best {

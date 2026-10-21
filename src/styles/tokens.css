@@ -23,6 +23,12 @@
   --red: #ff6b6b;
   --red-text: #ffb3b3;
 
+  /* Mode colors, after the game's rank tiers */
+  --rank-silver: #c3cad9;
+  --rank-jade: #3ccb9a;
+  --rank-gold: #f2c14e;
+  --rank-purple: #b48cff;
+
   /* Defeat screen: the same ground with a red cast */
   --defeat-bg: #0c0a12;
   --defeat-surface: #1a1420;

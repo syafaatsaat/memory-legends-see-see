@@ -157,13 +157,24 @@
   width: 100%;
 }
 
-/* Cards cap at ~190px so a two-row board fits on a laptop screen without scrolling. */
+/* Cards cap at ~190px so a two-row board fits on a laptop screen without scrolling.
+   Flex rather than grid so a part-filled last row (phones) sits centered. */
 .game__board {
-  display: grid;
-  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
-  gap: 16px;
-  max-width: calc(var(--cols) * 190px + (var(--cols) - 1) * 16px);
+  --gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--gap);
+  max-width: calc(var(--cols) * 190px + (var(--cols) - 1) * var(--gap));
   margin: 0 auto;
+}
+
+.game__board > .hero-card {
+  width: calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+}
+
+.game__board.is-hover-ready .hero-card:hover:not(:disabled) {
+  background: var(--gold);
 }
 
 .game__hint {
@@ -176,7 +187,7 @@
 @media (max-width: 760px) {
   .game__board {
     --cols: 3 !important;
-    gap: 10px;
+    --gap: 10px;
   }
 
   .game__main {

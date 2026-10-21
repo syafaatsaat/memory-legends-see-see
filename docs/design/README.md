@@ -24,6 +24,9 @@ and buttons, flat surfaces — no glows or gradient washes.
 
 All colors and sizes are tokens in `src/styles/tokens.css`.
 
+Mode cards take the game's rank colors: Easy silver, Medium jade, Hard gold, Endless purple
+(`--rank-*` tokens). This replaces the mockup's blue Easy/Medium/Hard and gold Endless cards.
+
 ## Modes
 
 | Mode | Roles | Win at | Heroes on board |
