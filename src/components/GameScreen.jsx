@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { featuredHero } from '../state/game.js'
 import { fetchHeroWallpaper } from '../state/wallpapersApi.js'
+import GameHelp from './GameHelp.jsx'
 import { BackIcon } from './Icons.jsx'
 import HeroCard from './HeroCard.jsx'
 import { useBoardFit } from './useBoardFit.js'
@@ -44,6 +45,7 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
   const isPlaying = game.status === 'playing'
   // The deal whose board the pointer has moved over; hover highlights wait for it.
   const [hoverRound, setHoverRound] = useState(-1)
+  const [helpOpen, setHelpOpen] = useState(false)
 
   const { areaRef, boardRef, fit } = useBoardFit(game.board.length, mode.columns)
 
@@ -59,6 +61,11 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
     const timer = setTimeout(onFinished, FINISH_DELAY_MS)
     return () => clearTimeout(timer)
   }, [isPlaying, onFinished, game])
+
+  function pickHero(heroId) {
+    setHelpOpen(false)
+    onPick(heroId)
+  }
 
   const lastPickId = game.history.at(-1)?.id
   function highlightFor(hero) {
@@ -92,6 +99,7 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
             {!isEndless && <span className="game__score-target">/ {mode.target}</span>}
           </div>
         </div>
+        <GameHelp mode={mode} open={helpOpen} onOpenChange={setHelpOpen} />
       </header>
 
       <div className="container">
@@ -110,7 +118,7 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
             onPointerMove={() => setHoverRound(game.deal)}
           >
             {game.board.map((hero, index) => (
-              <HeroCard key={hero.id} hero={hero} index={index} highlight={highlightFor(hero)} disabled={!isPlaying} onPick={onPick} />
+              <HeroCard key={hero.id} hero={hero} index={index} highlight={highlightFor(hero)} disabled={!isPlaying} onPick={pickHero} />
             ))}
           </div>
         </div>

@@ -269,7 +269,7 @@
     grid-template-columns: auto 1fr auto;
     grid-template-areas:
       'back name scores'
-      'roles roles roles';
+      'roles roles help';
     align-items: center;
     gap: 10px 12px;
     padding-top: 14px;
@@ -297,6 +297,11 @@
   .game__roles li {
     padding: 4px 10px;
     font-size: 12px;
+  }
+
+  .game-help {
+    grid-area: help;
+    justify-self: end;
   }
 
   .game__scores {

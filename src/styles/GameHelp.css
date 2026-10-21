@@ -1,0 +1,79 @@
+/* Only where the board's hint line is hidden (GameScreen.css): phones and short screens. */
+.game-help {
+  display: none;
+  position: relative;
+}
+
+@media (max-width: 760px), (max-height: 500px) {
+  .game-help {
+    display: block;
+  }
+}
+
+.game-help__button {
+  --cut: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: var(--surface);
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+/* Grows the tap area to 44px without making the HUD row taller. */
+.game-help__button::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+}
+
+.game-help__button.is-open {
+  background: var(--gold);
+  color: var(--on-gold);
+}
+
+.game-help__panel {
+  --cut: 12px;
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: min(280px, calc(100vw - 2 * var(--gutter)));
+  padding: 14px 16px;
+  background: var(--surface-2);
+  border-top: 2px solid var(--gold);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+  text-align: left;
+}
+
+.game-help__panel[hidden] {
+  display: none;
+}
+
+.game-help__goal {
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .game-help__panel {
+    animation: game-help-in 150ms ease-out backwards;
+  }
+}
+
+@keyframes game-help-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
