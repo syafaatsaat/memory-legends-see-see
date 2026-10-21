@@ -44,6 +44,16 @@
   background: var(--surface-2);
 }
 
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .game__back svg {
+    transition: transform 150ms ease-out;
+  }
+
+  .game__back:hover svg {
+    transform: translateX(-3px);
+  }
+}
+
 .game__mode-name {
   font-family: var(--font-display);
   font-weight: 700;
@@ -175,6 +185,33 @@
 
 .game__board.is-hover-ready .hero-card:hover:not(:disabled) {
   background: var(--gold);
+}
+
+/* Hover: the card lifts with a gold inner rim glow and the art zooms slightly in its frame.
+   Transitions only (no lasting animations), so Chrome redraws late-loading art normally. */
+@media (hover: hover) {
+  .game__board.is-hover-ready .hero-card:hover:not(:disabled) .hero-card__inner {
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 45%, transparent), inset 0 -24px 32px -16px color-mix(in srgb, var(--gold) 25%, transparent);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .game__board .hero-card,
+  .game__board .hero-card__art {
+    transition: transform 160ms ease-out;
+  }
+
+  .game__board.is-hover-ready .hero-card:hover:not(:disabled) {
+    transform: translateY(-4px);
+  }
+
+  .game__board.is-hover-ready .hero-card:hover:not(:disabled) .hero-card__art {
+    transform: scale(1.05);
+  }
+
+  .game__board.is-hover-ready .hero-card:hover:active:not(:disabled) {
+    transform: translateY(-1px) scale(0.98);
+  }
 }
 
 .game__hint {

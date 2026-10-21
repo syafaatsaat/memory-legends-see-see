@@ -387,6 +387,43 @@
   gap: 12px;
 }
 
+/* Entrance: each block fades and rises in turn. `backwards` fill so the animation fully ends. */
+@media (prefers-reduced-motion: no-preference) {
+  .result__body > *,
+  .result--endless > :not(.wallpaper) {
+    animation: result-rise 380ms ease-out backwards;
+  }
+
+  .result__body > :nth-child(2),
+  .result--endless > :nth-child(3) {
+    animation-delay: 60ms;
+  }
+
+  .result__body > :nth-child(3),
+  .result--endless > :nth-child(4) {
+    animation-delay: 120ms;
+  }
+
+  .result__body > :nth-child(4) {
+    animation-delay: 180ms;
+  }
+
+  .result__body > :nth-child(5) {
+    animation-delay: 240ms;
+  }
+
+  .result__body > :nth-child(n + 6) {
+    animation-delay: 300ms;
+  }
+}
+
+@keyframes result-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
 @media (max-width: 480px) {
   .result__stats dd {
     font-size: 24px;

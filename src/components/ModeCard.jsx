@@ -35,7 +35,9 @@ function ModeCard({ mode, bestScore, onSelect }) {
           ))}
         </dl>
         <span className="mode-card__foot">
-          <span className="mode-card__play">Play →</span>
+          <span className="mode-card__play">
+            Play <span className="mode-card__arrow" aria-hidden="true">→</span>
+          </span>
           {isEndless && (
             <span className="mode-card__best">
               Best <strong>{bestScore}</strong>

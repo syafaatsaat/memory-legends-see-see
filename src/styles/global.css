@@ -87,6 +87,50 @@ button {
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
+  /* Keeps the sweep (::before) above the button's background but under its label. */
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+  width: 60%;
+  background: linear-gradient(100deg, transparent, var(--sweep, rgb(255 255 255 / 0.18)), transparent);
+  transform: translateX(-120%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn--primary {
+  --sweep: rgb(255 255 255 / 0.45);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* A one-shot light sweep across the button on hover; it ends, so nothing stays animating. */
+  .btn:hover::before {
+    animation: btn-sweep 650ms ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition:
+      background-color 150ms ease-out,
+      transform 120ms ease-out;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+}
+
+@keyframes btn-sweep {
+  to {
+    transform: translateX(260%) skewX(-20deg);
+  }
 }
 
 .btn--primary {
