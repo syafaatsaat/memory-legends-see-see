@@ -38,7 +38,7 @@ src/styles/       tokens.css, global.css, one stylesheet per component
 - [x] 2. Game rules (`src/state/game.js`) — pure functions: pick random roles, build the hero pool, deal a board
       that always contains at least one unpicked hero, handle a pick (win / continue / defeat), Endless pool reset
 - [x] 3. Game state hook — `useReducer` around the rules, plus loading and error states for the hero fetch
-- [ ] 4. Game screen — HUD (mode, roles, score, progress), hero card grid, reshuffle after each pick
+- [x] 4. Game screen — HUD (mode, roles, score, progress), hero card grid, reshuffle after each pick
 - [ ] 5. Result screens — Victory, Defeat (shows the repeated hero), Endless record card with best-score save
 - [ ] 6. Polish — card shuffle animation, portrait preloading, loading skeletons, phone layout pass, reduced motion
 - [ ] 7. Wallpapers — blend `/api/heroes/wallpapers` art into the home and result screens

@@ -1,0 +1,189 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  border-top: 3px solid var(--gold);
+}
+
+.game > .container {
+  width: 100%;
+}
+
+.game__hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.game__mode {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.game__back {
+  --cut: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.game__back:hover {
+  background: var(--surface-2);
+}
+
+.game__mode-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.game__roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.game__roles li {
+  padding: 6px 12px;
+  border: 1px solid var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-text);
+}
+
+.game__scores {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+}
+
+.game__score,
+.game__best {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.game__label {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.game__score-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.game__score-target {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--faint);
+}
+
+.game__best-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.game__segments {
+  display: grid;
+  grid-template-columns: repeat(var(--segments), minmax(0, 1fr));
+  gap: 4px;
+}
+
+.game__segments span,
+.game__pool-bar {
+  height: 6px;
+  background: var(--line-soft);
+}
+
+.game__segments span.is-on {
+  background: var(--gold);
+}
+
+.game__pool-bar span {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  transition: width 200ms ease-out;
+}
+
+.game__pool-text {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* Takes the space left under the HUD and centers the board in it. */
+.game__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 36px;
+  padding-bottom: 48px;
+}
+
+.game__board {
+  width: 100%;
+}
+
+/* Cards cap at ~190px so a two-row board fits on a laptop screen without scrolling. */
+.game__board {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 16px;
+  max-width: calc(var(--cols) * 190px + (var(--cols) - 1) * 16px);
+  margin: 0 auto;
+}
+
+.game__hint {
+  margin-top: 28px;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .game__board {
+    --cols: 3 !important;
+    gap: 10px;
+  }
+
+  .game__main {
+    padding-top: 24px;
+  }
+
+  .game__score-value {
+    font-size: 36px;
+  }
+}

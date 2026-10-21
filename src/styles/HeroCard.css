@@ -1,0 +1,75 @@
+.hero-card {
+  --cut: 14px;
+  display: block;
+  width: 100%;
+  padding: 1px;
+  border: 0;
+  background: var(--line);
+  text-align: left;
+  cursor: pointer;
+}
+
+.hero-card:hover:not(:disabled),
+.hero-card:focus-visible {
+  background: var(--gold);
+}
+
+.hero-card:disabled {
+  cursor: default;
+}
+
+.hero-card__inner {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+}
+
+.hero-card__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  /* Splash art is square; faces sit in the upper half. */
+  object-position: 50% 30%;
+  background: var(--surface-2);
+}
+
+.hero-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px 12px;
+}
+
+.hero-card__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.1;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hero-card__roles {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .hero-card__name {
+    font-size: 16px;
+  }
+
+  .hero-card__roles {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+}
