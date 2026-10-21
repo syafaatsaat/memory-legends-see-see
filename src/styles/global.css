@@ -20,6 +20,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
+  /* dvh tracks the mobile address bar; plain vh is the bar-hidden height, which left the page
+     a bar's height taller than the screen (extra scroll space at the bottom on phones). */
+  min-height: 100dvh;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);

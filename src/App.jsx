@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useLayoutEffect, useState } from 'react'
 import DefeatScreen from './components/DefeatScreen.jsx'
 import EndlessOverScreen from './components/EndlessOverScreen.jsx'
 import GameScreen from './components/GameScreen.jsx'
@@ -24,6 +24,14 @@ function App() {
     setPendingModeId(null)
     start(getMode(pendingModeId), heroes.heroes)
   }
+
+  const screen = game ? (game === revealedGame ? 'result' : 'game') : pendingModeId ? 'load' : 'home'
+  // Screens swap in place without a page navigation, so the browser would keep the previous
+  // screen's scroll position (e.g. a match opening scrolled down). Reset it before paint;
+  // 'instant' overrides the smooth scrolling set on <html> for in-page links.
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [screen])
 
   function selectMode(modeId) {
     if (heroes.status === 'ready') start(getMode(modeId), heroes.heroes)
