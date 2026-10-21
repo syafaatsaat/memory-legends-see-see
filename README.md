@@ -3,7 +3,9 @@
 A hero memory game for Mobile Legends: Bang Bang fans. Every round the board reshuffles —
 pick a hero you haven't picked yet. Pick a repeat and the match is over.
 
-Hero data comes from the [Rone Arena API](https://arena.rone.dev/). Fan project, not affiliated with Moonton.
+Hero data comes from the [Rone Arena API](https://arena.rone.dev/). Hero art and wallpapers © Moonton,
+loaded from the source at runtime and not stored in this repo. Free fan project, not affiliated with
+or endorsed by Moonton.
 
 ## Modes
 

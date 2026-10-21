@@ -56,7 +56,8 @@ function HomeScreen({ bestScore, onSelectMode }) {
       </section>
 
       <footer className="home__footer">
-        Fan project. Hero data from the <a href="https://arena.rone.dev/">Rone Arena API</a>. Not affiliated with Moonton.
+        Fan project. Hero data from the <a href="https://arena.rone.dev/">Rone Arena API</a>. Hero art and wallpapers © Moonton.
+        Not affiliated with or endorsed by Moonton.
       </footer>
     </div>
   )
