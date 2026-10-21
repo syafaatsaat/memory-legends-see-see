@@ -38,6 +38,9 @@ Mode cards take the game's rank colors: Easy silver, Medium jade, Hard gold, End
 
 Rules: picked heroes are never marked on the board; the board reshuffles after every pick.
 
-## Later
+## Wallpapers
 
-- Blend hero wallpapers (`/api/heroes/wallpapers`) into the home and result screens.
+Official wallpapers sit behind the home screen (a random one each visit, top right) and the
+result screens (the featured hero: the winning pick or the repeated one). They are dimmed and
+faded into the background color on every edge, and the top-left corner, where the official art
+carries the game logo, always fades out fully.

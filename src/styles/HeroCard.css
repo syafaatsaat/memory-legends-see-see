@@ -47,11 +47,6 @@
   object-fit: cover;
   /* Splash art is square; faces sit in the upper half. */
   object-position: 50% 30%;
-  opacity: 0;
-}
-
-.hero-card__frame.is-loaded .hero-card__art {
-  opacity: 1;
 }
 
 .hero-card__text {
@@ -94,9 +89,11 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Deal in, staggered by board position (--i). */
+  /* Deal in, staggered by board position (--i). Fill mode is `backwards`, not `both`:
+     a forwards fill keeps the animation in effect forever, Chrome then keeps the card on its
+     own GPU layer, and art that finished downloading after the deal sometimes never got drawn. */
   .hero-card {
-    animation: card-deal 200ms ease-out both;
+    animation: card-deal 200ms ease-out backwards;
     animation-delay: calc(var(--i, 0) * 18ms);
   }
 
@@ -115,10 +112,6 @@
   .hero-card__frame:not(.is-loaded) {
     background: linear-gradient(100deg, var(--surface-2) 40%, var(--line) 50%, var(--surface-2) 60%) 0 0 / 300% 100%;
     animation: card-shimmer 1.2s linear infinite;
-  }
-
-  .hero-card__art {
-    transition: opacity 200ms ease-out;
   }
 }
 

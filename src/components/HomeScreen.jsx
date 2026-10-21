@@ -1,6 +1,8 @@
 import { MODES } from '../state/modes.js'
+import { useWallpaper } from '../state/useWallpaper.js'
 import { ShieldIcon } from './Icons.jsx'
 import ModeCard from './ModeCard.jsx'
+import Wallpaper from './Wallpaper.jsx'
 import '../styles/HomeScreen.css'
 
 const STEPS = [
@@ -10,8 +12,11 @@ const STEPS = [
 ]
 
 function HomeScreen({ bestScore, onSelectMode }) {
+  const wallpaper = useWallpaper()
+
   return (
     <div className="home">
+      <Wallpaper url={wallpaper} placement="banner" />
       <header className="home__bar container">
         <div className="home__logo">
           <ShieldIcon />

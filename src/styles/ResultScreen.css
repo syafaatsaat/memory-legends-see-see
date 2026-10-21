@@ -1,4 +1,6 @@
 .result {
+  position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +15,15 @@
 
 .result--defeat {
   background: var(--defeat-bg);
+}
+
+/* Wallpaper edges fade into each screen's own background. */
+.result .wallpaper {
+  --fade: var(--bg-deep);
+}
+
+.result--defeat .wallpaper {
+  --fade: var(--defeat-bg);
 }
 
 .result__body {

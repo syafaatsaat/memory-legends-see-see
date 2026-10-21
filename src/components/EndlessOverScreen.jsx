@@ -1,15 +1,20 @@
 import { InfinityIcon } from './Icons.jsx'
 import { useAutoFocus } from './useAutoFocus.js'
+import { featuredHero } from '../state/game.js'
+import { useWallpaper } from '../state/useWallpaper.js'
+import Wallpaper from './Wallpaper.jsx'
 import '../styles/ResultScreen.css'
 
 const dateFormat = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short', year: 'numeric' })
 
 // The record card is laid out to be screenshotted and shared as-is.
 function EndlessOverScreen({ game, bestScore, previousBest, isNewRecord, onPlayAgain, onChangeMode }) {
+  const wallpaper = useWallpaper(featuredHero(game).id)
   const headingRef = useAutoFocus()
 
   return (
     <div className="result result--endless">
+      <Wallpaper url={wallpaper} placement="full" />
       <section className="result__record bevel" aria-labelledby="result-title">
         <div className="result__record-inner bevel">
           <div className="result__record-head">

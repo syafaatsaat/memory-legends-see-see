@@ -1,12 +1,17 @@
 import ResultHeading from './ResultHeading.jsx'
+import { featuredHero } from '../state/game.js'
+import { useWallpaper } from '../state/useWallpaper.js'
+import Wallpaper from './Wallpaper.jsx'
 import '../styles/ResultScreen.css'
 
 function DefeatScreen({ game, onPlayAgain, onChangeMode }) {
+  const wallpaper = useWallpaper(featuredHero(game).id)
   const { mode, roles, score, repeatedHero, history } = game
   const firstPickNumber = history.findIndex((hero) => hero.id === repeatedHero.id) + 1
 
   return (
     <div className="result result--defeat">
+      <Wallpaper url={wallpaper} placement="full" />
       <section className="result__body" aria-labelledby="result-title">
         <ResultHeading title="Defeat" tone="defeat" />
         <p className="result__lead">

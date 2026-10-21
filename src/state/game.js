@@ -51,6 +51,11 @@ export function createGame(mode, heroes, random = Math.random) {
   }
 }
 
+// The hero a finished match is about: the repeated pick on a loss, the winning pick on a win.
+export function featuredHero(game) {
+  return game.repeatedHero ?? game.history.at(-1)
+}
+
 export function pickHero(game, heroId, random = Math.random) {
   if (game.status !== 'playing') return game
 

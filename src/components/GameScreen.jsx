@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
+import { featuredHero } from '../state/game.js'
+import { fetchHeroWallpaper } from '../state/wallpapersApi.js'
 import { BackIcon } from './Icons.jsx'
 import HeroCard from './HeroCard.jsx'
 import { usePreloadImages } from './usePreloadImages.js'
@@ -47,9 +49,13 @@ function GameScreen({ game, bestScore, onPick, onQuit, onFinished }) {
 
   useEffect(() => {
     if (isPlaying) return
+    // Start loading the result screen's wallpaper during the pause.
+    fetchHeroWallpaper(featuredHero(game).id).then((url) => {
+      if (url) new Image().src = url
+    })
     const timer = setTimeout(onFinished, FINISH_DELAY_MS)
     return () => clearTimeout(timer)
-  }, [isPlaying, onFinished])
+  }, [isPlaying, onFinished, game])
 
   const lastPickId = game.history.at(-1)?.id
   function highlightFor(hero) {

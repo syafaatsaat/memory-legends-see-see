@@ -1,11 +1,16 @@
 import ResultHeading from './ResultHeading.jsx'
+import { featuredHero } from '../state/game.js'
+import { useWallpaper } from '../state/useWallpaper.js'
+import Wallpaper from './Wallpaper.jsx'
 import '../styles/ResultScreen.css'
 
 function VictoryScreen({ game, onPlayAgain, onChangeMode }) {
+  const wallpaper = useWallpaper(featuredHero(game).id)
   const { mode, roles, history } = game
 
   return (
     <div className="result result--victory">
+      <Wallpaper url={wallpaper} placement="full" />
       <section className="result__body" aria-labelledby="result-title">
         <ResultHeading title="Victory" tone="victory" />
         <p className="result__lead">
