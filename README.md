@@ -1,5 +1,7 @@
 # Memory Legends
 
+**Play it:** https://memory-legends-see-see.vercel.app/
+
 A hero memory game for Mobile Legends: Bang Bang fans. Every round the board reshuffles —
 pick a hero you haven't picked yet. Pick a repeat and the match is over.
 
@@ -44,4 +46,4 @@ src/styles/       tokens.css, global.css, one stylesheet per component
 - [x] 5. Result screens — Victory, Defeat (shows the repeated hero), Endless record card with best-score save
 - [x] 6. Polish — card shuffle animation, portrait preloading, loading skeletons, phone layout pass, reduced motion
 - [x] 7. Wallpapers — blend `/api/heroes/wallpapers` art into the home and result screens
-- [ ] 8. Ship — production build, deploy
+- [x] 8. Ship — production build, deployed on Vercel
