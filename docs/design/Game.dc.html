@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Memory Legends — In game</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0A0F1E}
+a{color:#F2C14E}a:hover{color:#FFD97A}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0A0F1E; color: #EEF2FF; font-family: Inter, system-ui, sans-serif; box-sizing: border-box; border-top: 3px solid #F2C14E">
+  <header style="max-width: 1160px; margin: 0 auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+      <a href="Main.dc.html" aria-label="Back to modes" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #121A30; color: #EEF2FF; clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18 9 12l6-6"></path></svg>
+      </a>
+      <span style="font-family: Rajdhani, sans-serif; font-weight: 700; font-size: 26px; letter-spacing: 0.06em">MEDIUM</span>
+      <div style="display: flex; gap: 8px">
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; padding: 6px 12px; border: 1px solid #3DA5FF; color: #8CC8FF">MAGE</span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em; padding: 6px 12px; border: 1px solid #3DA5FF; color: #8CC8FF">MARKSMAN</span>
+      </div>
+    </div>
+    <div style="display: flex; align-items: baseline; gap: 8px" aria-live="polite">
+      <span style="font-size: 13px; letter-spacing: 0.14em; color: #A3AECB">PICKS</span>
+      <span style="font-family: Rajdhani, sans-serif; font-weight: 700; font-size: 44px; line-height: 1; color: #F2C14E">{{score}}</span>
+      <span style="font-family: Rajdhani, sans-serif; font-weight: 600; font-size: 26px; color: #8C97B5">/ {{target}}</span>
+    </div>
+  </header>
+
+  <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px">
+    <div style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 4px" role="img" aria-label="Progress">
+      <sc-for list="{{segments}}" as="seg" hint-placeholder-count="10">
+        <span style="height: 6px; background: {{seg.color}}"></span>
+      </sc-for>
+    </div>
+  </div>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 40px 24px 24px">
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px">
+      <sc-for list="{{heroes}}" as="hero" hint-placeholder-count="8">
+        <button type="button" onClick="{{hero.pick}}" style="all: unset; cursor: pointer; display: flex; flex-direction: column; background: #2A3658; padding: 1px; clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)">
+          <span style="display: flex; flex-direction: column; background: #121A30; clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px)">
+            <span style="aspect-ratio: 3 / 4; display: flex; align-items: center; justify-content: center; background: repeating-linear-gradient(135deg, #1A2442 0 10px, #16203A 10px 20px); font-size: 12px; color: #8C97B5; letter-spacing: 0.08em">[PORTRAIT]</span>
+            <span style="padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 2px">
+              <span style="font-family: Rajdhani, sans-serif; font-weight: 700; font-size: 20px; color: #EEF2FF">{{hero.name}}</span>
+              <span style="font-size: 12px; letter-spacing: 0.08em; color: #A3AECB">{{hero.role}}</span>
+            </span>
+          </span>
+        </button>
+      </sc-for>
+    </div>
+  </main>
+
+  <sc-if value="{{lost}}" hint-placeholder-val="{{ false }}">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px 16px">
+      <div style="padding: 14px 18px; border: 1px solid #FF6B6B; color: #FFB3B3; font-size: 15px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+        <span>You already picked {{lostName}}.</span><a href="Defeat.dc.html" style="color: #FFB3B3">See defeat screen →</a>
+      </div>
+    </div>
+  </sc-if>
+
+  <p style="max-width: 1160px; margin: 0 auto; padding: 0 24px 48px; font-size: 14px; color: #A3AECB; text-align: center">Pick a hero you haven't picked yet. The board reshuffles after every pick.</p>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      order: [0, 1, 2, 3, 4, 5, 6, 7],
+      picked: [1, 4, 6, 0, 3, 7],
+      lostName: null
+    };
+  }
+  renderVals() {
+    const pool = [
+      { name: 'Kagura', role: 'MAGE' }, { name: 'Layla', role: 'MARKSMAN' },
+      { name: 'Lunox', role: 'MAGE' }, { name: 'Granger', role: 'MARKSMAN' },
+      { name: 'Pharsa', role: 'MAGE' }, { name: 'Beatrix', role: 'MARKSMAN' },
+      { name: 'Valir', role: 'MAGE' }, { name: 'Wanwan', role: 'MARKSMAN' }
+    ];
+    const { order, picked, lostName } = this.state;
+    const target = 10;
+    const score = Math.min(picked.length, target);
+    const shuffle = (a) => a.map((v) => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map((p) => p[1]);
+    const heroes = order.map((i) => ({
+      ...pool[i],
+      pick: () => {
+        if (lostName) return;
+        if (picked.includes(i)) { this.setState({ lostName: pool[i].name }); return; }
+        this.setState({ picked: [...picked, i], order: shuffle(order) });
+      }
+    }));
+    const segments = Array.from({ length: target }, (_, k) => ({ color: k < score ? '#F2C14E' : '#1E2844' }));
+    return { heroes, score, target, segments, lost: !!lostName, lostName: lostName || '' };
+  }
+}
+</script>
+</body>
+</html>
